@@ -1,13 +1,25 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from "./users-module/users.module";
 import { ProductModule } from "./pruduct-module/product.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { DataSource } from "typeorm";
+import { AppController } from "./app.controller";
+import { Product } from "./models/product";
+
 
 @Module({
   imports: [
-    UsersModule,
-    ProductModule
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'alquimia',
+      database: 'nestjs',
+      entities: [Product],
+      synchronize: true,
+    }),
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],
