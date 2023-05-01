@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ProductModule } from "./pruduct-module/product.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { DataSource } from "typeorm";
 import { AppController } from "./app.controller";
 import { Product } from "./models/product";
 
