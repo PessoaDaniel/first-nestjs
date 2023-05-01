@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { ProductService } from "./product.service";
 import { Product } from "../models/product";
+import { CreateProductBody, UpdateProductBody } from "../dtos/ProductDTO";
 
 
 @Controller('products')
@@ -14,8 +15,8 @@ export class ProductController {
 
 
   @Post()
-  async create(@Body() body: any) {
-    const product = await this.productService.save(body);
+  async create(@Body() body: CreateProductBody) {
+    const product = await this.productService.save(body as Product);
     return {
       status: 'sucess',
       product: product
@@ -24,7 +25,7 @@ export class ProductController {
   }
 
   @Patch(':id')
-  async  update(@Body() body: Product, @Param() param) {
+  async  update(@Body() body: UpdateProductBody, @Param() param) {
     const { id } = param;
      let product: Product = await this.productService.findOne(id);
      product.name = body.name;
