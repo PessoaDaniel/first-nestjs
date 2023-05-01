@@ -18,17 +18,13 @@ export class ProductService {
   }
 
 
-  async  findOne (id: number) {
-    return this.productRepository.findOne({
-      where:  {
-        id: id
-      }
-    });
+  async  findOne (id) {
+    return this.productRepository.findOneBy({id: id});
   }
 
   async remove (id: number ) {
     const product =  await this.productRepository.findOne({
-      where: { id: id.valueOf() }
+      where: { id: id }
 
     } as FindOneOptions<Product>);
     console.log(product);

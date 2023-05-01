@@ -24,7 +24,8 @@ export class ProductController {
   }
 
   @Patch(':id')
-  async  update(@Body() body: Product, @Param() id: number) {
+  async  update(@Body() body: Product, @Param() param) {
+    const { id } = param;
      let product: Product = await this.productService.findOne(id);
      product.name = body.name;
      product = await  this.productService.save(product);
@@ -36,7 +37,8 @@ export class ProductController {
   }
 
   @Delete(':id')
-  async remove(@Param() id: number) {
+  async remove(@Param() param) {
+    const { id } = param;
     const product: Product = await this.productService.remove(id);
     return {
       status: 'success',
